@@ -269,6 +269,3 @@ elif [ $command = 'update' ]
 then
     echo 'command == update'
 fi
-
-#cd ..
-#rm -r $work_dir
