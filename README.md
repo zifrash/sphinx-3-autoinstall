@@ -46,9 +46,9 @@ https://github.com/psilocyberunner/sphinxsearch-v3-install
 
 Команды управления сервисом:
 
-systemctl status sphinx - статус сервиса
-systemctl start sphinx - старт сервиса
-systemctl stop sphinx - стоп сервиса
+`systemctl status sphinx` - статус сервиса
+`systemctl start sphinx` - старт сервиса
+`systemctl stop sphinx` - стоп сервиса
 
-systemctl enable sphinx - вешаем сервис в автозапуск
-systemctl disable sphinx - убираем сервис из автозапуска
+`systemctl enable sphinx` - вешаем сервис в автозапуск
+`systemctl disable sphinx` - убираем сервис из автозапуска
