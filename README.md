@@ -31,6 +31,66 @@ https://github.com/psilocyberunner/sphinxsearch-v3-install
 Создается tmpfiles.d и sphinx.conf (либо копируется ваш конфиг файл, если он лежит в папке со скриптом установки), создается файл sphinx.service.
 
 **Стандартный sphinx.conf настроен на rt индексы.**
+```text
+index default
+{
+	type = rt
+    path = /var/lib/sphinx/data/default
+
+    rt_mem_limit = 256M
+    index_exact_words = 1
+    morphology = stem_enru
+
+    rt_field = el_name
+	rt_field = el_price
+	rt_field = el_catalog
+
+	stored_fields = el_name, el_price, el_catalog
+
+	rt_attr_uint = el_id
+}
+
+indexer
+{
+	mem_limit = 512M
+}
+
+searchd
+{
+	listen = 127.0.0.1:9312
+	listen = 127.0.0.1:9306:mysql41
+	listen = /var/run/sphinx/searchd.sock:sphinx
+
+	log	= /var/log/sphinx/sphinx.log
+	query_log = /var/log/sphinx/query.log
+
+	read_timeout = 5
+	client_timeout = 300
+
+	max_children = 30
+
+	persistent_connections_limit = 30
+
+	pid_file = /var/run/sphinx/sphinx.pid
+	binlog_path = /var/lib/sphinx/data
+
+	seamless_rotate = 1
+
+	preopen_indexes	= 1
+
+	unlink_old = 1
+
+	max_packet_size = 8M
+
+	max_filters	= 256
+
+	max_filter_values = 4096
+
+	max_batch_queries = 32
+
+	workers	= threads
+}
+```
 
 И в конце спрашивается нужно ли запускать sphinx и добавлять в автозапуск, и копировать html документацию (sphinx3.html) если у вас на сервере есть директория /var/www/html (/var/www/html/sphinx3.html).
 
