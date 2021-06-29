@@ -10,7 +10,7 @@ https://github.com/psilocyberunner/sphinxsearch-v3-install
 
 Команды выполняются из папки со скриптом:
 
-`./sphinxsearch-v3-install.sh (./sphinxsearch-v3-install.sh -install)`
+`./sphinxsearch-v3-install.sh`
 
 Стандартный запуск скрипта, проверяет наличие всех необходимых пакетов:
     mysql-server - для переноса данных из mysql в sphinx
@@ -28,9 +28,9 @@ https://github.com/psilocyberunner/sphinxsearch-v3-install
 /var/lib/sphinx/data
 ```
 
-Создается tmpfiles.d и sphinx.conf (либо копируется ваш конфиг файл, если он лежит в папке со скриптом), создается файл sphinx.service.
+Создается tmpfiles.d и sphinx.conf (либо копируется ваш конфиг файл, если он лежит в папке со скриптом установки), создается файл sphinx.service.
 
-Стандартный sphinx.conf настроен на rt индексы.
+**Стандартный sphinx.conf настроен на rt индексы.**
 
 И в конце спрашивается нужно ли запускать sphinx и добавлять в автозапуск, и копировать html документацию (sphinx3.html) если у вас на сервере есть директория /var/www/html (/var/www/html/sphinx3.html).
 
