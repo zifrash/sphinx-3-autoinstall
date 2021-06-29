@@ -44,7 +44,7 @@ https://github.com/psilocyberunner/sphinxsearch-v3-install
 
 Будет предложенно удалить так же mysql-server и libmysqlclient-dev (стандартный ответ no, который активируется сам через 10 секунд).
 
-Команды управления сервисом:
+**Команды управления сервисом:**
 
 `systemctl status sphinx` - статус сервиса
 `systemctl start sphinx` - старт сервиса
