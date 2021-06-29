@@ -52,43 +52,43 @@ index default
 
 indexer
 {
-	mem_limit = 512M
+    mem_limit = 512M
 }
 
 searchd
 {
-	listen = 127.0.0.1:9312
-	listen = 127.0.0.1:9306:mysql41
-	listen = /var/run/sphinx/searchd.sock:sphinx
+    listen = 127.0.0.1:9312
+    listen = 127.0.0.1:9306:mysql41
+    listen = /var/run/sphinx/searchd.sock:sphinx
 
-	log = /var/log/sphinx/sphinx.log
-	query_log = /var/log/sphinx/query.log
+    log = /var/log/sphinx/sphinx.log
+    query_log = /var/log/sphinx/query.log
 
-	read_timeout = 5
-	client_timeout = 300
+    read_timeout = 5
+    client_timeout = 300
 
-	max_children = 30
+    max_children = 30
 
-	persistent_connections_limit = 30
+    persistent_connections_limit = 30
 
-	pid_file = /var/run/sphinx/sphinx.pid
-	binlog_path = /var/lib/sphinx/data
+    pid_file = /var/run/sphinx/sphinx.pid
+    binlog_path = /var/lib/sphinx/data
 
-	seamless_rotate = 1
+    seamless_rotate = 1
 
-	preopen_indexes	= 1
+    preopen_indexes	= 1
 
-	unlink_old = 1
+    unlink_old = 1
 
-	max_packet_size = 8M
+    max_packet_size = 8M
 
-	max_filters = 256
+    max_filters = 256
 
-	max_filter_values = 4096
+    max_filter_values = 4096
 
-	max_batch_queries = 32
+    max_batch_queries = 32
 
-	workers	= threads
+    workers	= threads
 }
 ```
 
@@ -104,14 +104,11 @@ searchd
 
 Будет предложенно удалить так же mysql-server и libmysqlclient-dev (стандартный ответ no, который активируется сам через 10 секунд).
 
-**Команды управления сервисом:**
-q
+**Команды управления сервисом**
+
 `systemctl status sphinx` - статус сервиса
-q
 `systemctl start sphinx` - старт сервиса
-q
 `systemctl stop sphinx` - стоп сервиса
-q
+
 `systemctl enable sphinx` - вешаем сервис в автозапуск
-q
 `systemctl disable sphinx` - убираем сервис из автозапуска
