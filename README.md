@@ -34,7 +34,7 @@ https://github.com/psilocyberunner/sphinxsearch-v3-install
 ```text
 index default
 {
-	type = rt
+    type = rt
     path = /var/lib/sphinx/data/default
 
     rt_mem_limit = 256M
@@ -42,12 +42,12 @@ index default
     morphology = stem_enru
 
     rt_field = el_name
-	rt_field = el_price
-	rt_field = el_catalog
+    rt_field = el_price
+    rt_field = el_catalog
 
-	stored_fields = el_name, el_price, el_catalog
+    stored_fields = el_name, el_price, el_catalog
 
-	rt_attr_uint = el_id
+    rt_attr_uint = el_id
 }
 
 indexer
@@ -61,7 +61,7 @@ searchd
 	listen = 127.0.0.1:9306:mysql41
 	listen = /var/run/sphinx/searchd.sock:sphinx
 
-	log	= /var/log/sphinx/sphinx.log
+	log = /var/log/sphinx/sphinx.log
 	query_log = /var/log/sphinx/query.log
 
 	read_timeout = 5
@@ -82,7 +82,7 @@ searchd
 
 	max_packet_size = 8M
 
-	max_filters	= 256
+	max_filters = 256
 
 	max_filter_values = 4096
 
@@ -105,10 +105,13 @@ searchd
 Будет предложенно удалить так же mysql-server и libmysqlclient-dev (стандартный ответ no, который активируется сам через 10 секунд).
 
 **Команды управления сервисом:**
-
+q
 `systemctl status sphinx` - статус сервиса
+q
 `systemctl start sphinx` - старт сервиса
+q
 `systemctl stop sphinx` - стоп сервиса
-
+q
 `systemctl enable sphinx` - вешаем сервис в автозапуск
+q
 `systemctl disable sphinx` - убираем сервис из автозапуска
