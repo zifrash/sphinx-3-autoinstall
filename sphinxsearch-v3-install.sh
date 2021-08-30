@@ -140,7 +140,7 @@ then
     if [ ! -f $sphinx_service ]
     then
         echo "Create sphinx.service"
-        printf "[Unit]\nDescription=Sphinx Search - Fast standalone full-text SQL search engine\nAfter=network.target\n\n[Service]\nType=simple\nUser=sphinx\nGroup=sphinx\nWorkingDirectory=/etc/sphinx/\nExecStart=/etc/sphinx/searchd\nExecStop=/etc/sphinx/searchd --stop\nPIDFile=/var/run/sphinx/sphinx.pid\n\n[Install]\nWantedBy=multi-user.target\nAlias=sphinx.service\nAlias=sphinxsearch.service" > $sphinx_service
+        printf "[Unit]\nDescription=Sphinx Search - Fast standalone full-text SQL search engine\nAfter=network.target\n\n[Service]\nType=simple\nWorkingDirectory=/etc/sphinx/\nExecStart=/etc/sphinx/searchd\nExecStop=/etc/sphinx/searchd --stop\nPIDFile=/var/run/sphinx/sphinx.pid\n\n[Install]\nWantedBy=multi-user.target" > $sphinx_service
     fi
 
     read -e -t $wait_time_question -p "Enable and start sphinx? (yes/no) " -i "yes" enable_sphinx
