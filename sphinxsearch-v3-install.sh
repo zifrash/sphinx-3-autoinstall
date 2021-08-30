@@ -5,9 +5,11 @@
 
 work_dir='sphinxsearch-v3-install'
 
-sphinx_dir_name='sphinx-3.3.1'
+# sphinx_dir_name='sphinx-3.3.1'
+sphinx_dir_name='sphinx-3.4.1'
 
-sphinx_file_name='sphinx-3.3.1-b72d67b-linux-amd64.tar.gz'
+#sphinx_file_name='sphinx-3.3.1-b72d67b-linux-amd64.tar.gz'
+sphinx_file_name='sphinx-3.4.1-efbcc65-linux-amd64.tar.gz'
 sphinx_file_server="http://sphinxsearch.com/files/$sphinx_file_name"
 
 sphinx_work_dir_list='/etc/sphinx /var/run/sphinx /var/log/sphinx /var/lib/sphinx /var/lib/sphinx/data'
@@ -88,15 +90,6 @@ then
         tar -xzf $sphinx_file_name
     fi
 
-    for file in $sphinx_work_file_list
-    do
-        if [ ! -f "/usr/bin/$file" ] && [ -f "$sphinx_dir_name/bin/$file" ]
-        then
-            echo " * Copy work file in bin: $file"
-            cp "$sphinx_dir_name/bin/$file" /usr/bin
-        fi
-    done
-
     if ! id sphinx > /dev/null 2>&1
     then
         echo "Create user and group \"sphinx\""
@@ -110,6 +103,17 @@ then
             echo " * Create work dir: $dir"
             mkdir -p $dir
             chown -R sphinx:sphinx $dir
+        fi
+    done
+
+    for file in $sphinx_work_file_list
+    do
+        if [ ! -f "/etc/sphinx/$file" ] && [ -f "$sphinx_dir_name/bin/$file" ]
+        then
+            echo " * Copy work file in etc: $file"
+            cp "$sphinx_dir_name/bin/$file" "/etc/sphinx/"
+
+            chown sphinx:sphinx "/etc/sphinx/$file"
         fi
     done
 
@@ -136,7 +140,7 @@ then
     if [ ! -f $sphinx_service ]
     then
         echo "Create sphinx.service"
-        printf "[Unit]\nDescription=Sphinx Search - Fast standalone full-text SQL search engine\nAfter=network.target\n\n[Service]\nExecStart=/usr/bin/searchd --config /etc/sphinx/sphinx.conf\nExecStop=/usr/bin/searchd --stop\nKillMode=process\nRestart=on-failure\nPIDFile=/var/run/sphinx/sphinx.pid\nUser=sphinx\nGroup=sphinx\n\n[Install]\nWantedBy=multi-user.target\nAlias=sphinx.service" > $sphinx_service
+        printf "[Unit]\nDescription=Sphinx Search - Fast standalone full-text SQL search engine\nAfter=network.target\n\n[Service]\nType=simple\nUser=sphinx\nGroup=sphinx\nWorkingDirectory=/etc/sphinx/\nExecStart=/etc/sphinx/searchd\nExecStop=/etc/sphinx/searchd --stop\nPIDFile=/var/run/sphinx/sphinx.pid\n\n[Install]\nWantedBy=multi-user.target\nAlias=sphinx.service\nAlias=sphinxsearch.service" > $sphinx_service
     fi
 
     read -e -t $wait_time_question -p "Enable and start sphinx? (yes/no) " -i "yes" enable_sphinx
